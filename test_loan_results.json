@@ -1,0 +1,44 @@
+[
+  {
+    "scenario": "Test A - Cotton Rajasthan",
+    "verified_class": "AnnualCrop",
+    "selected_crop": "Cotton",
+    "predicted_yield_tons_ha": 4.73,
+    "total_estimated_production_tons": 14.19,
+    "market_price_per_quintal_inr": 7250,
+    "gross_market_value_inr": 1028731.55,
+    "risk_adjusted_revenue_inr": 925858.39,
+    "requested_loan_inr": 150000,
+    "credit_score": 780,
+    "max_recommended_loan_inr": 648100.88,
+    "decision": "APPROVED"
+  },
+  {
+    "scenario": "Test B - High Loan Wheat",
+    "verified_class": "AnnualCrop",
+    "selected_crop": "Wheat",
+    "predicted_yield_tons_ha": 4.73,
+    "total_estimated_production_tons": 4.73,
+    "market_price_per_quintal_inr": 2200,
+    "gross_market_value_inr": 104055.60,
+    "risk_adjusted_revenue_inr": 93650.04,
+    "requested_loan_inr": 500000,
+    "credit_score": 425,
+    "max_recommended_loan_inr": 65555.03,
+    "decision": "REJECTED"
+  },
+  {
+    "scenario": "Test C - Non-Ag Highway Fraud",
+    "verified_class": "Highway",
+    "selected_crop": "None",
+    "predicted_yield_tons_ha": 0.0,
+    "total_estimated_production_tons": 0.0,
+    "market_price_per_quintal_inr": 0,
+    "gross_market_value_inr": 0.0,
+    "risk_adjusted_revenue_inr": 0.0,
+    "requested_loan_inr": 100000,
+    "credit_score": 300,
+    "max_recommended_loan_inr": 0.0,
+    "decision": "REJECTED"
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "Rajasthan": {
+    "Wheat": 2450.0,
+    "Rice": 2350.0,
+    "Cotton": 7250.0,
+    "Mustard": 5850.0,
+    "Maize": 2180.0,
+    "Sugarcane": 350.0
+  },
+  "Punjab": {
+    "Wheat": 2500.0,
+    "Rice": 2400.0,
+    "Cotton": 7350.0,
+    "Mustard": 5900.0,
+    "Maize": 2220.0,
+    "Sugarcane": 360.0
+  },
+  "Haryana": {
+    "Wheat": 2480.0,
+    "Rice": 2380.0,
+    "Cotton": 7300.0,
+    "Mustard": 5880.0,
+    "Maize": 2200.0,
+    "Sugarcane": 355.0
+  },
+  "National_Average": {
+    "Wheat": 2400.0,
+    "Rice": 2300.0,
+    "Cotton": 7150.0,
+    "Mustard": 5750.0,
+    "Maize": 2150.0,
+    "Sugarcane": 340.0
+  }
+}
