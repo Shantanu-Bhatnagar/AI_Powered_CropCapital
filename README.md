@@ -2,7 +2,7 @@
 
 CropCapital is an automated, AI-driven agricultural loan evaluation and underwriting engine. It bridges the gap between modern financial institutions and rural farmers by leveraging satellite imagery, machine learning yield predictions, and robust debt-coverage models to provide instantaneous, fair loan decisions.
 
-## 🎯 The Workflow (How It Works)
+## The Workflow (How It Works)
 
 1. **Farmer Requests a Loan:** A farmer visits the bank to request an agricultural loan.
 2. **Data Entry:** The bank employee enters the farmer's basic details, farm size, requested loan amount, and the exact **Latitude & Longitude** of the farmland into the CropCapital frontend.
@@ -13,7 +13,7 @@ CropCapital is an automated, AI-driven agricultural loan evaluation and underwri
     - It runs financial models to calculate the maximum safe lending cap and a risk-adjusted revenue projection.
 5. **Instant Decision:** The UI renders a gorgeous, easy-to-read dashboard detailing the AI's credit score, explainable debt-coverage metrics, and an automated "Smart Tranche" disbursement schedule (e.g. releasing 30% for sowing, 40% mid-season, 30% pre-harvest).
 
-## 🤝 How We Help Stakeholders
+## How We Help Stakeholders
 - **Primary Stakeholders (Banks & Financial Institutions):**
   - **Risk Mitigation:** Automatically rejects applications where the loan exceeds the maximum safe cap or where land is not actively agricultural.
   - **Operational Efficiency:** Reduces underwriting time from days to seconds.
@@ -24,7 +24,7 @@ CropCapital is an automated, AI-driven agricultural loan evaluation and underwri
   - Fairer assessments based on actual data (satellite health & weather) rather than subjective human biases.
   - Smart milestone disbursements help farmers manage their capital efficiently throughout the crop cycle.
 
-## 🚀 How to Run the Project
+## How to Run the Project
 
 The project is split into two parts: a Python Backend (FastAPI) and a React Frontend (Vite).
 
@@ -59,7 +59,7 @@ Make sure you have Node.js installed.
    ```
    *The frontend will now be accessible at http://localhost:5173*
 
-## 🔮 Future Enhancements
+## Future Enhancements
 - **Multi-spectral Satellite Analysis:** Integrate directly with Google Earth Engine or Sentinel-2 APIs to automatically pull historical NDVI data for the coordinates instead of relying on manual image uploads.
 - **Drone Integration:** Allow high-resolution drone survey image uploads for micro-level crop stress detection.
 - **Blockchain Smart Contracts:** Tie the "Smart Tranche Schedule" directly to a blockchain network, automatically releasing stablecoin funds to the farmer's wallet when satellite triggers hit certain health thresholds.
