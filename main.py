@@ -10,8 +10,8 @@ from geo_services import extract_vari_ndvi_proxy, fetch_live_weather, fetch_soil
 
 app = FastAPI(
     title="CropCapital API Engine",
-    description="Automated Land Verification, Seasonal Climate Telemetry & Rupee Crop Valuation",
-    version="2.2.0"
+    description="Automated Agricultural Loan Evaluation & Underwriting Engine",
+    version="3.0.0"
 )
 
 try:
@@ -23,7 +23,7 @@ except Exception as e:
 
 @app.get("/")
 def read_root():
-    return {"status": "Active", "system": "CropCapital Rupee Valuation Engine v2.2"}
+    return {"status": "Active", "system": "CropCapital Enterprise Underwriting v3.0"}
 
 @app.post("/evaluate-loan-auto")
 async def evaluate_loan_auto(
@@ -31,14 +31,14 @@ async def evaluate_loan_auto(
     latitude: float = Form(...),
     longitude: float = Form(...),
     farm_size_ha: float = Form(...),
-    requested_loan_amount_inr: float = Form(100000.0), # Default ₹1,00,000
-    crop_name: str = Form("Wheat"),                     # Choices: Wheat, Rice, Cotton, Mustard, Maize, Sugarcane
+    requested_loan_amount_inr: float = Form(100000.0),
+    crop_name: str = Form("Wheat"),
     state: str = Form("Rajasthan")
 ):
     if yield_model is None:
         raise HTTPException(status_code=500, detail="Yield prediction model binary is missing.")
 
-    # Step 1: Stage 0 Land Verification & VARI NDVI Extraction
+    # Step 1: Stage 0 Land Verification & VARI Extraction
     try:
         image_bytes = await image.read()
         img = Image.open(io.BytesIO(image_bytes)).convert('RGB')
@@ -60,7 +60,11 @@ async def evaluate_loan_auto(
             "status": "REJECTED",
             "reason": f"Land classified as '{predicted_class}'. Financing requires active agricultural land.",
             "verified_land_type": predicted_class,
-            "credit_score": 300
+            "credit_score": 300,
+            "ai_explainability": {
+                "top_decision_drivers": [f"Stage 0 Vision Model flagged land patch as {predicted_class}."],
+                "path_to_approval_advice": ["Provide satellite patch corresponding to active agricultural farmland."]
+            }
         }
 
     # Step 2: Fetch 120-Day Seasonal Climate Telemetry via GPS
@@ -77,13 +81,15 @@ async def evaluate_loan_auto(
     
     predicted_yield = float(yield_model.predict(input_data)[0])
 
-    # Step 4: Run Stage 2 Rupee Credit Engine
+    # Step 4: Run Stage 2 Underwriting Engine (Upgrades 1, 2, & 3)
     credit_analysis = evaluate_credit_risk(
         predicted_yield_tons_ha=predicted_yield,
         farm_size_ha=farm_size_ha,
         requested_loan_amount_inr=requested_loan_amount_inr,
         crop_name=crop_name,
-        state=state
+        state=state,
+        ndvi=auto_ndvi,
+        rainfall_mm=seasonal_rainfall
     )
 
     return {
