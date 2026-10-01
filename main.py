@@ -7,6 +7,9 @@ from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from Verify_Land import transform, model, CLASSES, device, torch
 from credit_engine import evaluate_credit_risk
 from geo_services import extract_vari_ndvi_proxy, fetch_live_weather, fetch_soil_ph
+from agtech_api import AgTechAPIClient
+
+agtech_client = AgTechAPIClient()
 
 app = FastAPI(
     title="CropCapital API Engine",
@@ -67,9 +70,16 @@ async def evaluate_loan_auto(
             }
         }
 
-    # Step 2: Fetch 120-Day Seasonal Climate Telemetry via GPS
-    seasonal_temp, seasonal_rainfall = fetch_live_weather(latitude, longitude, season_days=120)
+    # Step 2: Fetch 120-Day Seasonal Climate Telemetry via GPS & AgTech API
+    real_ag_data = agtech_client.fetch_real_climate_and_soil(latitude, longitude)
+    seasonal_temp = real_ag_data["temp_c"]
+    seasonal_rainfall = real_ag_data["rainfall_mm"]
+    soil_moisture = real_ag_data["soil_moisture_pct"]
+    
     auto_ph = fetch_soil_ph(latitude, longitude)
+    
+    # AgTech API: Specific Crop Verification
+    detected_specific_crop = agtech_client.detect_crop_type(latitude, longitude)
 
     # Step 3: Run Stage 1 XGBoost Yield Prediction
     input_data = pd.DataFrame([{
@@ -98,10 +108,12 @@ async def evaluate_loan_auto(
             "vegetation_index_ndvi_proxy": auto_ndvi,
             "seasonal_avg_daytime_temp_c": seasonal_temp,
             "seasonal_total_rainfall_mm": seasonal_rainfall,
-            "soil_ph": auto_ph
+            "soil_ph": auto_ph,
+            "soil_moisture": soil_moisture
         },
         "land_verification": {
             "verified_class": predicted_class,
+            "detected_crop": detected_specific_crop,
             "is_valid": is_valid_land
         },
         "yield_prediction": {
